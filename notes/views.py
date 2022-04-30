@@ -4,7 +4,7 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Note
-# from .forms import NotesForm
+from .forms import NotesForm
 
 
 
@@ -23,16 +23,17 @@ from .models import Note
     
     
 
-# class NotesCreateView(CreateView):
-#     model = Note
-#     success_url = ''
-#     form_class = 
+class NotesCreateView(CreateView):
+    model = Note
+    success_url = '/notes'
+    form_class = NotesForm
+    template_name="notes/notes_form.html"
 
-#     def form_valid(self, form):
-#         self.object = form.save(commit=False)
-#         self.object.user = self.request.user
-#         self.object.save()
-#         return HttpResponseRedirect(self.get_success_url())
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return HttpResponseRedirect(self.get_success_url())
 
 
 
