@@ -9,17 +9,18 @@ from .forms import NotesForm
 
 
 
-# class NotesDeleteView(DeleteView):
-#     model=Note
-#     success_url = ''
-#     template_name = ''
+class NotesDeleteView(DeleteView):
+    model=Note
+    success_url = '/notes'
+    template_name = "notes/notes_delete.html"
 
 
     
-# class NotesUpdateView(UpdateView):
-#     model = Note
-#     success_url = ''
-#     form_class = 
+class NotesUpdateView(UpdateView):
+    model = Note
+    success_url = '/notes'
+    form_class = NotesForm
+    template_name="notes/notes_form.html"
     
     
 
@@ -44,8 +45,8 @@ class NotesListView(LoginRequiredMixin, ListView):
     template_name = "notes/notes.html"
     login_url = "/admin"
 
-    # def get_queryset(self):
-    #     return self.request.user.notes.all()
+    def get_queryset(self):
+        return self.request.user.notes.all()
     
     
 
